@@ -1,6 +1,6 @@
 import sys
 from time import sleep
-from os import scandir, rename
+from os import scandir, rename, mkdir
 from os.path import splitext, exists, join
 from shutil import move
 from watchdog.observers import Observer
@@ -9,14 +9,23 @@ import pystray
 from pystray import Icon as icon, Menu as menu, MenuItem as item
 from PIL import Image
 
-sourceDir = r'C:\Users\cuyoc\OneDrive\Imágenes\Capturas de pantalla'
-fileDestDir = r'C:\Users\cuyoc\Downloads\example\lugar'
+sourceDir = r'...'
+fileDestDir = r'...'
 
 def moveFile(dest,currDir,name):
+    filename , ext = splitext(name)
+    print(dest)
+    dest = join(dest,ext.replace('.',''))
+    print(dest)
+    DirectoryExists = exists(f'{dest}')
+    if not(DirectoryExists):
+        print(dest)
+        mkdir(dest)
+        
     FileExists = exists(f'{dest}/{name}')
     newName = name
     if FileExists:
-        filename , ext = splitext(name)
+        
         count = 1
         while exit(f'{dest}/{newName}'):
             newName=f'{filename} ({str(count)}{ext})'
